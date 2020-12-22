@@ -1,0 +1,244 @@
+
+<!-- saved from url=(0042)http://192.168.173.13:8080/board-test.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<style>
+th{
+	color:white
+}
+td{
+	color:white
+}
+
+svg text {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+svg text::selection {
+    background: none;
+}
+path.switcher{
+  stroke: #2727e6;
+  stroke-width:10px;
+  stroke-linecap:round;
+  fill:none;
+}
+path#buttonPad {
+  stroke: #e62727;
+}
+
+div.mouseCatcher{
+    width: 100%;
+    height:100%;
+    position:absolute;
+    z-index : 45; /* under popup zindex; over all else */
+    visibility: hidden;
+}
+
+div.popup{
+	visibility:hidden;
+	/*right:0;*/
+        top:48px;
+	background-color: #666;
+	position:absolute;
+	z-index:50;
+	/*margin: 15px;*/
+	padding: 15px;
+	border-radius:10px;
+	border-color:white;
+	border-width:2;
+	border-style:solid;
+}
+/* Change the background color on mouse-over */
+.popup a:hover {
+  background-color: #ddd;
+  color: black;
+  text-decoration:underline;
+}
+
+.popup a {
+  background-color: #555;
+  color: white;
+}
+
+/* Style the active/current link*/
+.popup a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+p.journal {
+}
+
+</style>
+</head>
+<body>
+
+<div style="position:relative;display:table">
+
+
+	<div style="display:inline-block;height:400">
+		<div id="boardToolsFrame" style="vertical-align:top;display:inline-block;width:300;height:200;background:blue">
+		<svg width="66" height="66" viewBox="-2 -2 68 68">
+		<defs>
+			<radialgradient id="gradient-0" gradientUnits="userSpaceOnUse" cx="-38.806" cy="-32.359" r="31.21" gradientTransform="matrix(0.556701, 0.060335, -0.061948, 0.571572, 35.942307, 40.952184)"><stop offset="0" style="stop-color: rgba(255, 249, 249, 0.72);"></stop><stop offset="1" style="stop-color: rgba(255, 255, 255, 0);"></stop></radialgradient>
+			<radialgradient id="gradient-1" gradientUnits="userSpaceOnUse" cx="7.916" cy="20.156" r="31.21" gradientTransform="matrix(1.665372, 0.004509, -0.004806, 1.773443, -10.723868, -25.421527)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.45);"></stop></radialgradient>
+			<radialgradient id="gradient-2" gradientUnits="userSpaceOnUse" cx="5.259" cy="16.687" r="31.21" gradientTransform="matrix(1.490671, 0.00387, 0.00009, 1.829344, 1.658628, -19.147887)"><stop offset="0" style="stop-color: rgba(246, 243, 243, 0);"></stop><stop offset="1" style=""></stop></radialgradient>
+			<lineargradient id="gradient-4" gradientUnits="userSpaceOnUse" x1="17.355" y1="-22.732" x2="17.355" y2="44.298" gradientTransform="matrix(0.770686, -0.637215, 0.374193, 0.45257, 22.306562, 74.687881)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0.29);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.06);"></stop></lineargradient>
+		</defs>
+		<!--
+		<ellipse style="fill: rgb(255, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+		<ellipse style="fill: rgb(0, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+		<ellipse style="fill: rgb(128, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+		-->
+		<circle id="nodeColor" style="fill: rgb(35, 232, 0);" cx="32" cy="32" r="30"></circle>
+		<circle style="fill:url(&quot;#gradient-2&quot;); fill-opacity: 0.28;" cx="39" cy="39" r="30" transform="matrix(1.062366, 0, 0, 1.046363, -8.38973, -7.437199)"></circle>
+		<circle style="fill: url(&quot;#gradient-0&quot;); fill-opacity: 0.78;" cx="32" cy="32" r="30"></circle>
+		<circle style="fill:  url(&quot;#gradient-1&quot;); fill-opacity: 0.68;" cx="32" cy="32" r="30"></circle>
+		<circle style="fill: url(&quot;#gradient-4&quot;);" cx="32" cy="32" r="30" transform="matrix(1.00693, 0, 0, 0.99307, -0.224218, 0.3336)"></circle>
+	</svg><svg width="66" height="66" viewBox="100 -5 130 170">   
+				<ellipse cx="164.18392" cy="128.5" fill="#ffffff" id="svg_26" rx="41.17323" ry="12" stroke="#7f7f7f" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6"></ellipse>
+				<ellipse cx="164.18392" cy="123.5" fill="#ffffff" id="svg_27" rx="41.17323" ry="12" stroke="#ffffff" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6"></ellipse>
+				<ellipse cx="163.35715" cy="120.75" fill="#4558e8" id="svg_24" rx="35.07874" ry="11.25" stroke="#4558e8" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="6"></ellipse>
+				<rect fill="#4558e8" height="65" id="svg_25" stroke="#cccccc" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="0" stroke-width="6" width="75.81102" x="125.62486" y="55.5"></rect>
+				<ellipse cx="163.53037" cy="51.5" fill="#ffffff" id="svg_23" rx="41.17323" ry="12" stroke="#cccccc" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2"></ellipse>
+				<ellipse cx="163.93392" cy="45.25" fill="#b2b2b2" id="svg_21" rx="41.17323" ry="12" stroke="#cccccc" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="2"></ellipse>
+
+			</svg><svg width="66" height="66" viewBox="-10 0 150 150">
+				<defs>
+				<radialgradient id="gradient-0n" gradientUnits="userSpaceOnUse" cx="32.806" cy="38.359" r="31.21" gradientTransform="matrix(0.556701, 0.060335, -0.061948, 0.571572, 35.942307, 40.952184)"><stop offset="0" style="stop-color: rgba(255, 249, 249, 0.72);"></stop><stop offset="1" style="stop-color: rgba(255, 255, 255, 0);"></stop></radialgradient>
+				<radialgradient id="gradient-1n" gradientUnits="userSpaceOnUse" cx="37.916" cy="50.156" r="31.21" gradientTransform="matrix(1.665372, 0.004509, -0.004806, 1.773443, -10.723868, -25.421527)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.45);"></stop></radialgradient>
+				<radialgradient id="gradient-2n" gradientUnits="userSpaceOnUse" cx="35.259" cy="46.687" r="31.21" gradientTransform="matrix(1.490671, 0.00387, 0.00009, 1.829344, 1.658628, -19.147887)"><stop offset="0" style="stop-color: rgba(246, 243, 243, 0);"></stop><stop offset="1" style=""></stop></radialgradient>
+				<lineargradient id="gradient-4n" gradientUnits="userSpaceOnUse" x1="47.355" y1="12.732" x2="47.355" y2="74.298" gradientTransform="matrix(0.770686, -0.637215, 0.374193, 0.45257, 22.306562, 74.687881)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0.29);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.06);"></stop></lineargradient>
+			</defs>
+			<!--
+			<ellipse style="fill: rgb(255, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(128, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 255, 68);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			-->
+			<circle style="fill: rgb(225, 195, 135); fill-opacity:0.5" cx="63" cy="78" r="60"></circle>
+			<ellipse id="nodeColor" style="fill: rgb(192, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<circle style="fill: url(&quot;#gradient-2n&quot;); fill-opacity: 0.68;" cx="69.539" cy="83.618" r="30.783" transform="matrix(1.062366, 0, 0, 1.046363, -8.38973, -7.437199)"></circle>
+			<circle style="fill: url(&quot;#gradient-0n&quot;); fill-opacity: 0.68;" cx="63.14" cy="78.072" r="30.783"></circle>
+			<!--
+			<circle style="fill: url(&quot;#gradient-1n&quot;); fill-opacity: 0.68;" cx="63.567" cy="77.218" r="30.783"></circle>
+			<circle style="fill: url(&quot;#gradient-4n&quot;);" cx="63.14" cy="78.925" r="30.783" transform="matrix(1.00693, 0, 0, 0.99307, -0.224218, 0.3336)"></circle>
+			-->
+		
+	<g id="iconColor" class="layer" stroke="#DDDD00" fill="#DDDD00" transform="translate( 36,27) scale( 0.60) ">
+	 <rect height="31" stroke-opacity="0" stroke-width="5" width="20" x="34.5" y="43.5"></rect>
+	 <path d="m44.125,98.54167c0,-1 -31.75,-25.25 -31.75,-25.25c0,0 65.25,-0.25 65.125,-0.29167c-0.125,-0.04167 -33.375,26.54167 -33.375,25.54167z" id="svg_4" stroke="#000000" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="0" stroke-width="5"></path>
+	 <rect fill="#000000" fill-opacity="0" height="11.25" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3" width="25.5" x="31.125" y="106.70833"></rect>
+	 <rect fill="#000000" fill-opacity="0" height="0.25" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3" width="66.5" x="9.625" y="117.95833"></rect>
+	</g>
+	</svg><svg width="66" height="66" viewBox="-10 0 150 150">
+				<defs>
+				<radialgradient id="gradient-0n" gradientUnits="userSpaceOnUse" cx="32.806" cy="38.359" r="31.21" gradientTransform="matrix(0.556701, 0.060335, -0.061948, 0.571572, 35.942307, 40.952184)"><stop offset="0" style="stop-color: rgba(255, 249, 249, 0.72);"></stop><stop offset="1" style="stop-color: rgba(255, 255, 255, 0);"></stop></radialgradient>
+				<radialgradient id="gradient-1n" gradientUnits="userSpaceOnUse" cx="37.916" cy="50.156" r="31.21" gradientTransform="matrix(1.665372, 0.004509, -0.004806, 1.773443, -10.723868, -25.421527)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.45);"></stop></radialgradient>
+				<radialgradient id="gradient-2n" gradientUnits="userSpaceOnUse" cx="35.259" cy="46.687" r="31.21" gradientTransform="matrix(1.490671, 0.00387, 0.00009, 1.829344, 1.658628, -19.147887)"><stop offset="0" style="stop-color: rgba(246, 243, 243, 0);"></stop><stop offset="1" style=""></stop></radialgradient>
+				<lineargradient id="gradient-4n" gradientUnits="userSpaceOnUse" x1="47.355" y1="12.732" x2="47.355" y2="74.298" gradientTransform="matrix(0.770686, -0.637215, 0.374193, 0.45257, 22.306562, 74.687881)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0.29);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.06);"></stop></lineargradient>
+			</defs>
+			<!--
+			<ellipse style="fill: rgb(255, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(128, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 255, 68);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			-->
+			<circle style="fill: rgb(225, 195, 135); fill-opacity:0.5" cx="63" cy="78" r="60"></circle>
+			<ellipse id="nodeColor" style="fill: rgb(0, 0, 192);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<circle style="fill: url(&quot;#gradient-2n&quot;); fill-opacity: 0.68;" cx="69.539" cy="83.618" r="30.783" transform="matrix(1.062366, 0, 0, 1.046363, -8.38973, -7.437199)"></circle>
+			<circle style="fill: url(&quot;#gradient-0n&quot;); fill-opacity: 0.68;" cx="63.14" cy="78.072" r="30.783"></circle>
+			<!--
+			<circle style="fill: url(&quot;#gradient-1n&quot;); fill-opacity: 0.68;" cx="63.567" cy="77.218" r="30.783"></circle>
+			<circle style="fill: url(&quot;#gradient-4n&quot;);" cx="63.14" cy="78.925" r="30.783" transform="matrix(1.00693, 0, 0, 0.99307, -0.224218, 0.3336)"></circle>
+			-->
+		
+	<g id="iconColor" class="layer" stroke="#FFFF00" transform="translate(40,45) scale( 0.50 )">
+	<title>Layer 1</title>
+	<path d="m57.08333,72.08333c2,8 1,18.5 1.5,22.5c0.5,4 -9.5,-1.5 -7.5,5c2,6.5 -12.5,6.5 -10.58333,-0.58333c1.91667,-7.08333 -3.41667,0.58333 -6.41667,-2.41667c-3,-3 5.5,-27 -3.58333,-33.08333c-9.08333,-6.08333 -11.91667,-12.41667 -8.91667,-26.91667c3,-14.5 7,-15 18,-18.5c11,-3.5 18,0 26.91667,9.91667c8.91667,9.91667 7.08333,14.58333 5.08333,24.58333c-2,10 -16.5,11.5 -14.5,19.5z" fill="#000000" fill-opacity="0" id="svg_3" opacity="0.7" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></path>
+	<line fill="none" fill-opacity="0" opacity="0.7" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3" x1="33.58333" x2="58.58333" y1="86.08333" y2="86.08333"></line>
+	<line fill="none" fill-opacity="0" opacity="0.7" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3" transform="rotate(-1.16913 45.8333 96.3333)" x1="34.08333" x2="57.58333" y1="96.58333" y2="96.08333"></line>
+	 </g>
+	 </svg><svg width="66" height="66" viewBox="-10 0 150 150">
+				<defs>
+				<radialgradient id="gradient-0n" gradientUnits="userSpaceOnUse" cx="32.806" cy="38.359" r="31.21" gradientTransform="matrix(0.556701, 0.060335, -0.061948, 0.571572, 35.942307, 40.952184)"><stop offset="0" style="stop-color: rgba(255, 249, 249, 0.72);"></stop><stop offset="1" style="stop-color: rgba(255, 255, 255, 0);"></stop></radialgradient>
+				<radialgradient id="gradient-1n" gradientUnits="userSpaceOnUse" cx="37.916" cy="50.156" r="31.21" gradientTransform="matrix(1.665372, 0.004509, -0.004806, 1.773443, -10.723868, -25.421527)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.45);"></stop></radialgradient>
+				<radialgradient id="gradient-2n" gradientUnits="userSpaceOnUse" cx="35.259" cy="46.687" r="31.21" gradientTransform="matrix(1.490671, 0.00387, 0.00009, 1.829344, 1.658628, -19.147887)"><stop offset="0" style="stop-color: rgba(246, 243, 243, 0);"></stop><stop offset="1" style=""></stop></radialgradient>
+				<lineargradient id="gradient-4n" gradientUnits="userSpaceOnUse" x1="47.355" y1="12.732" x2="47.355" y2="74.298" gradientTransform="matrix(0.770686, -0.637215, 0.374193, 0.45257, 22.306562, 74.687881)"><stop offset="0" style="stop-color: rgba(227, 227, 227, 0.29);"></stop><stop offset="1" style="stop-color: rgba(0, 0, 0, 0.06);"></stop></lineargradient>
+			</defs>
+			<!--
+			<ellipse style="fill: rgb(255, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 0, 255);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(128, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<ellipse style="fill: rgb(0, 255, 68);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			-->
+			<circle style="fill: rgb(225, 195, 135); fill-opacity:0.5" cx="63" cy="78" r="60"></circle>
+			<ellipse id="nodeColor" style="fill: rgb(192, 0, 0);" cx="63.354" cy="78.071" rx="30.93" ry="30.717"></ellipse>
+			<circle style="fill: url(&quot;#gradient-2n&quot;); fill-opacity: 0.68;" cx="69.539" cy="83.618" r="30.783" transform="matrix(1.062366, 0, 0, 1.046363, -8.38973, -7.437199)"></circle>
+			<circle style="fill: url(&quot;#gradient-0n&quot;); fill-opacity: 0.68;" cx="63.14" cy="78.072" r="30.783"></circle>
+			<!--
+			<circle style="fill: url(&quot;#gradient-1n&quot;); fill-opacity: 0.68;" cx="63.567" cy="77.218" r="30.783"></circle>
+			<circle style="fill: url(&quot;#gradient-4n&quot;);" cx="63.14" cy="78.925" r="30.783" transform="matrix(1.00693, 0, 0, 0.99307, -0.224218, 0.3336)"></circle>
+			-->
+		
+	<g id="iconColor" class="layer" stroke="#DDDD00" fill="#DDDD00" transform="translate( 28,40) scale( 0.60)">
+	<title>Layer 1</title>
+	<rect height="15" id="svg_1" opacity="0.7" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3" width="33" x="17.83333" y="48.5"></rect>
+	<path d="m52.033,77.5l-1.033,-42.5c0,0 24.58544,20.66514 25.82504,19.88532c1.2396,-0.77982 -24.79204,22.61468 -24.79204,22.61468z" id="svg_3" opacity="0.7" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></path>
+	<circle cx="93.83333" cy="33.5" id="svg_4" opacity="0.7" r="2.82843" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></circle>
+	<circle cx="94.2201" cy="49.05119" id="svg_5" opacity="0.7" r="2.82843" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></circle>
+	<circle cx="94.3847" cy="64.51913" id="svg_6" opacity="0.7" r="2.82843" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></circle>
+	<circle cx="94.17787" cy="81.27198" id="svg_7" opacity="0.7" r="2.82843" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="3"></circle>
+ </g>
+ </svg></div>	
+		<div id="boardMonitorFrame" style="z-index:3;display:inline-block;width:300;height:200;background:#003010">
+
+		<svg viewBox="0 0 130 170" preserveAspectRatio="xMaxYMax" style="width: 15%; height: 66px; vertical-align: top;"><rect x="0" y="0" width="100" height="125" stroke="none" fill="#d0c090"></rect><rect x="5" y="5" width="90" height="115" stroke="black" fill="none"></rect><defs><pattern id="transformedPattern" x="20" y="10" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect x="0" y="0" width="30" height="2" stroke="black" fill="none"></rect><rect x="0" y="0" width="2" height="20" fill="black"></rect></pattern></defs><circle id="speakerGrill" r="35" cx="50" cy="45" fill="url(#transformedPattern)" stroke="red"></circle><circle id="testButtonLED" r="5" cx="80" cy="105" fill="#12a510" stroke="black" stroke-width="1"></circle></svg><svg viewBox="0 100 200 50" preserveAspectRatio="xMaxYMax" style="width: 25%; height: 66px; vertical-align: top;"><rect x="0" y="0" width="200" height="125" stroke="none" fill="#d0c090"></rect><rect x="5" y="5" width="190" height="115" stroke="black" fill="none"></rect><defs><pattern id="transformedPattern" x="20" y="10" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><rect x="0" y="0" width="30" height="2" stroke="black" fill="none"></rect><rect x="0" y="0" width="2" height="20" fill="black"></rect></pattern></defs><circle id="testButton" r="15" cx="50" cy="50" fill="#a51210" stroke="white" stroke-width="5"></circle><text x="22" y="100" font-size="24px" font-style="sans-serif" stroke="black">TEST</text><path d=" M 125 15 A 45 45, 0, 1, 1, 117.18583200498813 15.68365111445064  L 122.39527733499604 45.227883704816875 A 15 15, 0, 1, 0, 125 45 Z" fill="red" stroke="black" stroke-width="2"></path></svg><svg viewBox="0 00 100 175" style="width: 48px; height: 64px;"><circle id="driveRotor" r="40" cx="50" cy="50" fill="yellow"></circle><circle id="drivePivot" r="4" fill="black" cx="40.364928864654836" cy="32.473865109019656"></circle><path class="switcher" id="driveArm" stroke="blue" stroke-width="10" stroke-linecap="round" d="M40.364928864654836,32.473865109019656 L50,111.89152941751489"></path><path class="switcher" id="driveRod" stroke="blue" stroke-width="5" stroke-linecap="round" d="M50,111.89152941751489 L50,121.89152941751489"></path><path id="buttonPad" stroke="red" stroke-width="10" stroke-linecap="round" d="M40,140 L60,140"></path></svg><svg viewBox="0 00 100 175" style="width: 48px; height: 64px;"><circle id="driveRotor" r="40" cx="50" cy="50" fill="yellow"></circle><circle id="drivePivot" r="4" fill="black" cx="61.43627634928141" cy="33.59233157140032"></circle><path class="switcher" id="driveArm" stroke="blue" stroke-width="10" stroke-linecap="round" d="M61.43627634928141,33.59233157140032 L50,112.77068456805507"></path><path class="switcher" id="driveRod" stroke="blue" stroke-width="5" stroke-linecap="round" d="M50,112.77068456805507 L50,122.77068456805507"></path><path id="buttonPad" stroke="red" stroke-width="10" stroke-linecap="round" d="M40,140 L60,140"></path></svg><svg width="166" height="250" viewBox="0 00 100 255" transform="rotate(-90 0 -25)" style="height: 128px; width: 96px;">
+		<defs>
+			<lineargradient id="gradient-0c" gradientUnits="userSpaceOnUse" x1="37.908" y1="38.388" x2="37.908" y2="76.776" gradientTransform="matrix(0.29251, 0.956262, -1.062492, 0.325005, 98.316635, 28.52927)">
+					<stop offset="0" style="stop-color: rgba(216, 216, 216, 1)"></stop>
+					<stop offset="1" style="stop-color: rgba(165, 165, 165, 1)"></stop>
+			</lineargradient>
+			<bx-grid x="3.828" y="21.693" width="110.208" height="155.72"></bx-grid>
+		</defs>
+		<rect x="31.67" y="11.879" width="9.597" height="223.023" style="fill: rgb(216, 216, 216);" transform="matrix(1, 0, -0.000002, 1, -14.036083, -4.615945)"></rect>
+		<g style="" transform="matrix(1, 0, 0, 1.070711, -35.728859, 29.265072)">
+			<rect x="89.251" y="7.198" width="47.025" height="168.426" style="fill: rgb(216, 216, 216);"></rect><text style="fill: rgb(51, 51, 51); font-size: 11px; white-space: pre;" x="107.966" y="19.673">100</text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 1.919386, -3.358925)">60<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="116.342" y="165.32">0</text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.422" y="125.013">30</text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.219415, -52.050926)">90<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="113.943" y="152.364">10</text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.699265, 51.595898)">20<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, -0.260427, 24.724503)">40<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.699265, 10.32911)">50<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.219419, -19.42137)">70<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.219419, -36.215992)">80<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre; pointer-events: none; visibility: hidden;" x="114.203" y="85.893" transform="matrix(1, 0, 0, 1, 0.219418, -46.772614)">50<tspan x="114.2030029296875" dy="1em">&#8203;</tspan></text><text transform="matrix(1, 0, 0, 1, 85.63208, -33.816761)" style="fill: rgb(51, 51, 51); font-size: 10px; white-space: pre; visibility: hidden;">
+					<tspan x="114.203" y="85.893" dx="4.319 4.319" dy="7.198">50</tspan>
+					<tspan x="114.203" dy="1em">&#8203;</tspan>
+			</text>
+			<line style="stroke: rgb(0, 0, 0);" x1="94.53" y1="14.875" x2="107.965" y2="14.395"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="96.449" y1="162.668" x2="112.284" y2="162.188"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="96.449" y1="94.05" x2="113.244" y2="93.57"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="109.792" y1="149.247" x2="101.998" y2="149.586"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="111.825" y1="135.015" x2="103.354" y2="135.354"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="111.487" y1="121.46" x2="105.726" y2="121.46"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="110.809" y1="107.906" x2="104.709" y2="106.212"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="111.148" y1="79.103" x2="104.37" y2="79.442"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="111.148" y1="63.177" x2="104.37" y2="62.499"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="110.809" y1="46.234" x2="104.032" y2="45.895"></line>
+			<line style="stroke: rgb(0, 0, 0);" x1="109.115" y1="30.307" x2="99.965" y2="29.968"></line>
+		</g>
+		<g id="arrow" transform="matrix(1, 0, 0, 1, -13.610993, -12.375999) translate(0,63.75900970458984)">
+			<path d="M 49.248 38.071 H 64.916 L 64.916 38.071 L 90.189 55.251 L 64.916 72.431 L 64.916 72.431 H 49.248 V 38.071 Z" data-bx-shape="arrow 49.248 38.071 40.941 34.36 34.36 25.273 0 1@8e88e44e" style="fill: rgb(223, 32, 32);" transform="matrix(0.999561, 0.029616, -0.029616, 0.999561, -5.786447, -0.060718)"></path>
+			<ellipse style="fill: rgb(216, 216, 216);" cx="38.149" cy="38.868" rx="13.195" ry="4.799"></ellipse>
+			<rect x="23.993" y="38.388" width="27.831" height="38.388" style="fill: url(&quot;#gradient-0c&quot;);"></rect>
+		</g> 
+		</svg><svg viewBox="0 00 450 155" style="width: 328px; height: 150px; position: relative; top: -80px; z-index: 3;"><rect x="0" y="0" width="420" height="210" stroke="none" fill="#d0c090"></rect><rect x="5" y="5" width="410" height="120" stroke="black" fill="none"></rect><circle id="logicJack" r="5" cx="22" cy="40" fill="#657210" stroke="#805040" stroke-width="2"></circle><circle id="logicJack" r="5" cx="22" cy="60" fill="#657210" stroke="#805040" stroke-width="2"></circle><circle id="logicJack" r="5" cx="22" cy="80" fill="#657210" stroke="#805040" stroke-width="2"></circle><circle id="logicJack" r="5" cx="22" cy="100" fill="#657210" stroke="#805040" stroke-width="2"></circle><rect x="45" y="15" width="350" height="100" stroke="white" fill="black" stroke-width="2"></rect><path stroke="red" d="M390,20L387.71066666666667,30L385.42133333333334,30L383.132,30L380.8426666666667,20L378.55333333333334,20L376.24133333333333,20L373.952,20L371.572,20L369.28266666666667,20L366.99333333333334,30L364.704,30L362.4146666666667,30L360.10266666666666,30L357.836,30L355.5013333333333,30L353.23466666666667,30L350.9,20L348.6333333333333,20L346.3666666666667,20L344.0093333333333,20L341.74266666666665,20L339.43066666666664,20L337.1186666666667,30L334.82933333333335,30L332.54,30L330.2506666666667,30L327.96133333333336,30L325.64933333333335,30L323.36,30L321.00266666666664,20L318.6906666666667,20L316.40133333333335,20L314.11199999999997,20L311.8,20L309.5106666666667,20L307.244,30L304.9773333333333,30L302.688,30L300.42133333333334,30L298.1093333333333,30L295.82,30L293.508,30L291.21866666666665,30L288.9293333333333,20L286.64,20L284.30533333333335,20L282.0386666666667,20L279.7266666666667,20L277.4373333333333,20L275.12533333333334,30L272.85866666666664,30L270.56933333333336,30L268.25733333333335,30L265.94533333333334,30L263.656,30L261.38933333333335,30L259.07733333333334,20L256.74266666666665,20L254.43066666666667,20L252.11866666666666,20L249.62533333333334,20L247.29066666666665,20L245.00133333333335,30L242.71200000000002,30L240.42266666666666,30L238.11066666666667,30L235.79866666666666,30L233.50933333333333,30L231.22,30L228.93066666666667,20L226.61866666666668,20L224.32933333333332,20L222.06266666666667,20L219.72799999999998,20L217.416,20L215.12666666666667,30L212.83733333333333,30L210.54799999999997,30L208.25866666666667,30L205.96933333333334,30L203.67999999999998,30L201.36800000000002,30L199.056,20L196.78933333333333,20L194.47733333333335,20L192.16533333333334,20L189.876,20L187.58666666666664,20L185.2746666666667,30L182.96266666666668,30L180.67333333333332,30L178.36133333333336,30L176.04933333333335,30L173.76,30L171.44799999999998,30L169.11333333333334,20L166.824,20L164.512,20L162.2,20L159.888,20L157.59866666666667,20L155.28666666666666,30L152.99733333333336,30L150.68533333333335,30L148.396,30L145.90266666666668,30L143.59066666666666,30L141.30133333333333,30L139.012,20L136.72266666666667,20L134.4333333333333,20L132.12133333333333,20L129.8093333333333,20L127.4973333333333,20L125.16266666666667,30L122.8053333333333,30L120.5386666666667,30L118.22666666666669,30L115.9373333333333,30L113.64800000000002,30L111.38133333333332,30L109.04666666666668,20L106.73466666666667,20L104.44533333333334,20L102.13333333333333,20L99.82133333333331,20L97.50933333333336,20L95.19733333333335,30L92.81733333333335,30L90.52799999999996,30L88.23866666666669,30L85.92666666666668,30L83.63733333333334,30L81.34799999999996,30L79.01333333333332,20L76.74666666666667,20L74.45733333333334,20L72.168,20L69.87866666666667,20L67.56666666666666,20L65.23199999999997,30L62.920000000000016,30L60.630666666666684,30L58.341333333333296,30L56.02933333333334,30L53.76266666666669,30L51.4733333333333,30L49.161333333333346,20"></path><path stroke="red" d="M390,40L387.71066666666667,50L385.42133333333334,50L383.132,50L380.8426666666667,50L378.55333333333334,50L376.24133333333333,50L373.952,50L371.572,50L369.28266666666667,50L366.99333333333334,50L364.704,50L362.4146666666667,50L360.10266666666666,50L357.836,50L355.5013333333333,50L353.23466666666667,50L350.9,50L348.6333333333333,40L346.3666666666667,40L344.0093333333333,40L341.74266666666665,40L339.43066666666664,40L337.1186666666667,40L334.82933333333335,40L332.54,40L330.2506666666667,40L327.96133333333336,40L325.64933333333335,40L323.36,40L321.00266666666664,40L318.6906666666667,40L316.40133333333335,40L314.11199999999997,40L311.8,40L309.5106666666667,40L307.244,40L304.9773333333333,40L302.688,50L300.42133333333334,50L298.1093333333333,50L295.82,50L293.508,50L291.21866666666665,50L288.9293333333333,50L286.64,50L284.30533333333335,50L282.0386666666667,50L279.7266666666667,50L277.4373333333333,50L275.12533333333334,50L272.85866666666664,50L270.56933333333336,50L268.25733333333335,50L265.94533333333334,50L263.656,50L261.38933333333335,50L259.07733333333334,50L256.74266666666665,50L254.43066666666667,50L252.11866666666666,50L249.62533333333334,50L247.29066666666665,40L245.00133333333335,40L242.71200000000002,40L240.42266666666666,40L238.11066666666667,40L235.79866666666666,40L233.50933333333333,40L231.22,40L228.93066666666667,40L226.61866666666668,40L224.32933333333332,40L222.06266666666667,40L219.72799999999998,40L217.416,40L215.12666666666667,40L212.83733333333333,40L210.54799999999997,40L208.25866666666667,40L205.96933333333334,40L203.67999999999998,40L201.36800000000002,50L199.056,50L196.78933333333333,50L194.47733333333335,50L192.16533333333334,50L189.876,50L187.58666666666664,50L185.2746666666667,50L182.96266666666668,50L180.67333333333332,50L178.36133333333336,50L176.04933333333335,50L173.76,50L171.44799999999998,50L169.11333333333334,50L166.824,50L164.512,50L162.2,50L159.888,50L157.59866666666667,50L155.28666666666666,50L152.99733333333336,50L150.68533333333335,50L148.396,50L145.90266666666668,40L143.59066666666666,40L141.30133333333333,40L139.012,40L136.72266666666667,40L134.4333333333333,40L132.12133333333333,40L129.8093333333333,40L127.4973333333333,40L125.16266666666667,40L122.8053333333333,40L120.5386666666667,40L118.22666666666669,40L115.9373333333333,40L113.64800000000002,40L111.38133333333332,40L109.04666666666668,40L106.73466666666667,40L104.44533333333334,40L102.13333333333333,40L99.82133333333331,50L97.50933333333336,50L95.19733333333335,50L92.81733333333335,50L90.52799999999996,50L88.23866666666669,50L85.92666666666668,50L83.63733333333334,50L81.34799999999996,50L79.01333333333332,50L76.74666666666667,50L74.45733333333334,50L72.168,50L69.87866666666667,50L67.56666666666666,50L65.23199999999997,50L62.920000000000016,50L60.630666666666684,50L58.341333333333296,50L56.02933333333334,50L53.76266666666669,50L51.4733333333333,50L49.161333333333346,50"></path><path stroke="red" d="M390,60L387.71066666666667,65L385.42133333333334,63.97999877929688L383.132,62.97999877929688L380.8426666666667,61.97999877929688L378.55333333333334,60.95L376.24133333333333,60L373.952,60L371.572,60L369.28266666666667,60L366.99333333333334,60L364.704,60L362.4146666666667,60L360.10266666666666,60L357.836,60L355.5013333333333,60L353.23466666666667,60L350.9,60L348.6333333333333,60L346.3666666666667,60L344.0093333333333,60L341.74266666666665,60.279998779296875L339.43066666666664,61.289999389648436L337.1186666666667,62.3L334.82933333333335,63.3L332.54,64.32000122070312L330.2506666666667,65.32999877929687L327.96133333333336,66.33999938964844L325.64933333333335,67.36000061035156L323.36,68.38999938964844L321.00266666666664,69.38999938964844L318.6906666666667,70L316.40133333333335,70L314.11199999999997,70L311.8,70L309.5106666666667,70L307.244,70L304.9773333333333,70L302.688,70L300.42133333333334,70L298.1093333333333,70L295.82,70L293.508,70L291.21866666666665,70L288.9293333333333,70L286.64,70L284.30533333333335,69.36000061035156L282.0386666666667,68.35L279.7266666666667,67.32999877929687L277.4373333333333,66.32000122070312L275.12533333333334,65.32999877929687L272.85866666666664,64.28999938964844L270.56933333333336,63.279998779296875L268.25733333333335,62.26000061035156L265.94533333333334,61.23999938964844L263.656,60.220001220703125L261.38933333333335,60L259.07733333333334,60L256.74266666666665,60L254.43066666666667,60L252.11866666666666,60L249.62533333333334,60L247.29066666666665,60L245.00133333333335,60L242.71200000000002,60L240.42266666666666,60L238.11066666666667,60L235.79866666666666,60L233.50933333333333,60L231.22,60L228.93066666666667,60L226.61866666666668,60.929998779296874L224.32933333333332,61.939999389648435L222.06266666666667,62.95L219.72799999999998,63.95L217.416,64.97000122070312L215.12666666666667,65.97999877929688L212.83733333333333,66.98999938964843L210.54799999999997,68L208.25866666666667,69.01000061035157L205.96933333333334,70L203.67999999999998,70L201.36800000000002,70L199.056,70L196.78933333333333,70L194.47733333333335,70L192.16533333333334,70L189.876,70L187.58666666666664,70L185.2746666666667,70L182.96266666666668,70L180.67333333333332,70L178.36133333333336,70L176.04933333333335,70L173.76,70L171.44799999999998,69.82000122070312L169.11333333333334,68.81000061035157L166.824,67.78999938964844L164.512,66.77999877929688L162.2,65.76000061035157L159.888,64.75L157.59866666666667,63.75L155.28666666666666,62.72999877929688L152.99733333333336,61.720001220703125L150.68533333333335,60.710000610351564L148.396,60L145.90266666666668,60L143.59066666666666,60L141.30133333333333,60L139.012,60L136.72266666666667,60L134.4333333333333,60L132.12133333333333,60L129.8093333333333,60L127.4973333333333,60L125.16266666666667,60L122.8053333333333,60L120.5386666666667,60L118.22666666666669,60L115.9373333333333,60L113.64800000000002,60.61000061035156L111.38133333333332,61.620001220703124L109.04666666666668,62.629998779296876L106.73466666666667,63.65L104.44533333333334,64.65L102.13333333333333,65.66000061035156L99.82133333333331,66.67000122070313L97.50933333333336,67.67000122070313L95.19733333333335,68.67000122070313L92.81733333333335,69.67999877929688L90.52799999999996,70L88.23866666666669,70L85.92666666666668,70L83.63733333333334,70L81.34799999999996,70L79.01333333333332,70L76.74666666666667,70L74.45733333333334,70L72.168,70L69.87866666666667,70L67.56666666666666,70L65.23199999999997,70L62.920000000000016,70L60.630666666666684,70L58.341333333333296,69.98999938964843L56.02933333333334,68.97999877929688L53.76266666666669,67.97000122070312L51.4733333333333,66.92999877929688L49.161333333333346,65.92999877929688"></path><path stroke="red" d="M390,80L387.71066666666667,80L385.42133333333334,80L383.132,80L380.8426666666667,80L378.55333333333334,80L376.24133333333333,80L373.952,80L371.572,80L369.28266666666667,80L366.99333333333334,80L364.704,80L362.4146666666667,80L360.10266666666666,80L357.836,80L355.5013333333333,80L353.23466666666667,80L350.9,80L348.6333333333333,80L346.3666666666667,80L344.0093333333333,80L341.74266666666665,80L339.43066666666664,80L337.1186666666667,80L334.82933333333335,80L332.54,80L330.2506666666667,80L327.96133333333336,80L325.64933333333335,80L323.36,80L321.00266666666664,80L318.6906666666667,80L316.40133333333335,80L314.11199999999997,80L311.8,80L309.5106666666667,80L307.244,80L304.9773333333333,80L302.688,80L300.42133333333334,80L298.1093333333333,80L295.82,80L293.508,80L291.21866666666665,80L288.9293333333333,80L286.64,80L284.30533333333335,80L282.0386666666667,80L279.7266666666667,80L277.4373333333333,80L275.12533333333334,80L272.85866666666664,80L270.56933333333336,80L268.25733333333335,80L265.94533333333334,80L263.656,80L261.38933333333335,80L259.07733333333334,80L256.74266666666665,80L254.43066666666667,80L252.11866666666666,80L249.62533333333334,80L247.29066666666665,80L245.00133333333335,80L242.71200000000002,80L240.42266666666666,80L238.11066666666667,80L235.79866666666666,80L233.50933333333333,80L231.22,80L228.93066666666667,80L226.61866666666668,80L224.32933333333332,80L222.06266666666667,80L219.72799999999998,80L217.416,80L215.12666666666667,80L212.83733333333333,80L210.54799999999997,80L208.25866666666667,80L205.96933333333334,80L203.67999999999998,80L201.36800000000002,80L199.056,80L196.78933333333333,80L194.47733333333335,80L192.16533333333334,80L189.876,80L187.58666666666664,80L185.2746666666667,80L182.96266666666668,80L180.67333333333332,80L178.36133333333336,80L176.04933333333335,80L173.76,80L171.44799999999998,80L169.11333333333334,80L166.824,80L164.512,80L162.2,80L159.888,80L157.59866666666667,80L155.28666666666666,80L152.99733333333336,80L150.68533333333335,80L148.396,80L145.90266666666668,80L143.59066666666666,80L141.30133333333333,80L139.012,80L136.72266666666667,80L134.4333333333333,80L132.12133333333333,80L129.8093333333333,80L127.4973333333333,80L125.16266666666667,80L122.8053333333333,80L120.5386666666667,80L118.22666666666669,80L115.9373333333333,80L113.64800000000002,80L111.38133333333332,80L109.04666666666668,80L106.73466666666667,80L104.44533333333334,80L102.13333333333333,80L99.82133333333331,80L97.50933333333336,80L95.19733333333335,80L92.81733333333335,80L90.52799999999996,80L88.23866666666669,80L85.92666666666668,80L83.63733333333334,80L81.34799999999996,80L79.01333333333332,80L76.74666666666667,80L74.45733333333334,80L72.168,80L69.87866666666667,80L67.56666666666666,80L65.23199999999997,80L62.920000000000016,80L60.630666666666684,80L58.341333333333296,80L56.02933333333334,80L53.76266666666669,80L51.4733333333333,80L49.161333333333346,80"></path><path stroke="blue" d="M50,100L390,100"></path><path stroke="blue" d="M50,120L390,120"></path><path stroke="blue" d="M50,140L390,140"></path><path stroke="blue" d="M50,160L390,160"></path></svg></div>	
+
+	<div id="statusContainer" style="max-height:600;display:inline-block;vertical-align:top;background:black;color:white; width:270;overflow:auto">
+		<table id="statusTable" width="100%" style="vertical-align:top;display:inline-block;width:250">
+			<tbody><tr><th>Name/Type</th><th>Thr / Gain</th><th>Output</th></tr>
+			
+		</tbody></table>
+	</div>	
+
+
+</div>
+
+
+
+
+</body></html>
