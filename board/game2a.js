@@ -255,13 +255,14 @@
 	};
 
 	var Neuron$1 = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		Neuron: Neuron,
 		Sigmoid: Sigmoid,
 		Oscillator: Oscillator,
 		TickOscillator: TickOscillator,
 		External: External,
 		Exporter: Exporter,
-		default: neuron
+		'default': neuron
 	});
 
 	function Synapse() {
@@ -372,11 +373,11 @@
 			UnLinkSynapseFrom( synapse ){
 				synapse.DetachSource();
 			},
-			LinkSynapseFrom( synapse, neuron$$1, n) {
-				return synapse.AttachSource( neuron$$1, neuron$$1.attachSynapseFrom( n ) );
+			LinkSynapseFrom( synapse, neuron, n) {
+				return synapse.AttachSource( neuron, neuron.attachSynapseFrom( n ) );
 			},
-			LinkSynapseTo( synapse, neuron$$1, n) {
-				return synapse.AttachDestination( neuron$$1, neuron$$1.attachSynapse( n ) );
+			LinkSynapseTo( synapse, neuron, n) {
+				return synapse.AttachDestination( neuron, neuron.attachSynapse( n ) );
 			},
 			toJson() {
 				
@@ -699,7 +700,6 @@
 		  outofs.y = 0;
 					  outofs.cell = this.getcell( 5, 0, scale );
 		  return outofs 
-					  break;
 	  case UP_RIGHT:
 		  outofs.x = 0;
 		  outofs.y = -1;
@@ -1364,9 +1364,9 @@
 			// origin point rotates to accomodate.
 			// this path must begin from NOWHERE to direction.
 	        
-			Layer.prototype.BeginPath = function(  _x, _y, direction$$1 )
+			Layer.prototype.BeginPath = function(  _x, _y, direction$1 )
 			{
-				if( direction$$1 === undefined ) direction$$1 = direction.NOWHERE;
+				if( direction$1 === undefined ) direction$1 = direction.NOWHERE;
 				var node= layerPathNode();
 				this.x = _x;
 				this.y = _y;
@@ -1380,7 +1380,7 @@
 				node.y = 0; // y - LAYER::y
 	        
 				node.flags.BackDir = direction.NOWHERE;
-				if( direction$$1 == direction.NOWHERE )
+				if( direction$1 == direction.NOWHERE )
 				{
 					this.flags.bForced = 0;
 					// there is no real peice which is
@@ -1393,7 +1393,7 @@
 				{
 					this.flags.bForced = 1;
 					node.flags.bForced = 1;
-					node.flags.ForeDir = direction$$1;
+					node.flags.ForeDir = direction$1;
 				}
 	        
 				this.pds_path.push( node );
@@ -1846,7 +1846,7 @@
 			get(peice, routable, _x,  _y, _w,  _h,  ofsx,  ofsy ) {
 				var l = pool.pop();
 				if( !l ) 
-					l = Layer(board, peice, routable, _x,  _y, _w,  _h,  ofsx,  ofsy );
+					l = Layer(board, peice, routable, _x,  _y, _w,  _h,  ofsx);
 				return l;
 			}
 			,drop(l) {
@@ -5215,7 +5215,6 @@
 				case 0: switch( axis2 ){
 					case 0:
 						throw new Error( "Invalid axis combination, cannot rotate axis toward itself")
-					break;
 					case 1:
 						var save1x = te[0], save1y = te[1], save1z = te[2];
 						var tmp1x = te[0] * ca, tmp1y = te[1] * ca, tmp1z = te[2] * ca;
@@ -5248,7 +5247,6 @@
 						break;
 					case 1:
 						throw new Error( "Invalid axis combination, cannot rotate axis toward itself")
-					break;
 					case 2:
 						var save1x = te[4], save1y = te[5], save1z = te[6];
 						var tmp1x = te[4] * ca, tmp1y = te[5] * ca, tmp1z = te[6] * ca;
@@ -5281,7 +5279,6 @@
 					break;
 					case 2:
 						throw new Error( "Invalid axis combination, cannot rotate axis toward itself")
-					break;
 				}
 				break;
 			}
@@ -6223,7 +6220,7 @@
 				r.y = y;
 				r.z = z;
 			}
-			else{
+			else {
 				r = new Vector3(x,y,z);
 			}
 			return r;
@@ -56008,8 +56005,6 @@ void main() {
 
 	var activators = [];
 
-	var testControl = null;
-
 	function addSliderInput( n, x, y ) {
 	        var newN = brainBoard.board.PutPeice( brainBoard.sliderInputPeice, x, y, ()=>{
 	                //console.log( "Get External" );
@@ -56306,7 +56301,6 @@ void main() {
 			 	return;
 			}
 	        }
-	        testControl && testControl.reset();
 		gameState.journalState = newPage;
 
 		gameState.progressLocked = journal[gameState.journalState].locked || false;
@@ -56421,20 +56415,20 @@ void main() {
 	                addNeuron( p, n ) {
 	                        var newRow = this.table.insertRow();
 	                        var newRow2 = this.table.insertRow();
-	                        neuron$$1( newRow, newRow2, n, p );
+	                        neuron( newRow, newRow2, n, p );
 				itemMap.set( n, [newRow,newRow2] );
 	                },
 	                addSynapse( p, n ) {
 	                        var newRow = this.table.insertRow();
 	                        var newRow2 = this.table.insertRow();
-	                        synapse( newRow, newRow2, n, p );
+	                        synapse( newRow, newRow2, n);
 				itemMap.set( n, [newRow,newRow2] );
 	                }
 	        };
 	        statuses.clear();
 	        return statuses;
 
-	        function neuron$$1( row, row2, n, p ) {
+	        function neuron( row, row2, n, p ) {
 			const thisNeuron = n;
 			row.addEventListener( "click", ()=>{
 				statuses.select( thisNeuron );			
