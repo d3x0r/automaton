@@ -1017,21 +1017,21 @@ BackgroundMethods.prototype.OnRightClick = function(  psv,  x,  y )
 			{
 			case MNU_ADDNEURON:
 				console.log( ("Put neuron peice at %d,%d"), x, y );
-				var newN = brainboard.board.PutPeice( brainboard.NeuronPeice, x, y, 0 );
+				let {psvInstance : newN} = brainboard.board.PutPeice( brainboard.NeuronPeice, x, y, 0 );
 				if( brainboard.events["added"] )
 					brainboard.events["added"](  brainboard.NeuronPeice,newN );
 				return true;
 			case MNU_ADDOSC:
 				console.log( ("Put osc peice at %d,%d"), x, y );
-				var newN = brainboard.board.PutPeice( brainboard.OscillatorPeice, x, y, 0 );
+				let {psvInstance : newN2} = brainboard.board.PutPeice( brainboard.OscillatorPeice, x, y, 0 );
 				if( brainboard.events["added"] )
-					brainboard.events["added"]( brainboard.OscillatorPeice, newN );
+					brainboard.events["added"]( brainboard.OscillatorPeice, newN2 );
 				return true;
 			case MNU_ADDTICKOSC:
 				console.log( ("Put tickosc peice at %d,%d"), x, y );
-				var newN = brainboard.board.PutPeice( brainboard.TickOscillatorPeice, x, y, 0 );
+				let {psvInstance : newN3} = brainboard.board.PutPeice( brainboard.TickOscillatorPeice, x, y, 0 );
 				if( brainboard.events["added"] )
-					brainboard.events["added"]( brainboard.TickOscillatorPeice,newN );
+					brainboard.events["added"]( brainboard.TickOscillatorPeice,newN3 );
 				return true;
 			case MNU_ZOOM:
 			case MNU_ZOOM+1:

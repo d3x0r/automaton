@@ -4,10 +4,10 @@
   "description": "",
   "main": "./brain/brain.mjs",
   "exports": {
-        "import": "./brain/brain.mjs",
-        "require": "./brain/brain.js",
-        "browser": "./brain/brain.mjs.gz"
-  } ,
+    "import": "./brain/brain.mjs",
+    "require": "./brain/brain.js",
+    "browser": "./brain/brain.mjs.gz"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

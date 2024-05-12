@@ -58,22 +58,13 @@ export const  LINK_VIA_END = 1
 
 
 //class LAYER
-export function Layer( board, peice,  _x,  _y, _w,  _h,  ofsx,  ofsy )
+export function Layer( board, peice,  psv, _x,  _y, _w,  _h,  ofsx,  ofsy )
 {
-	if(!(this instanceof Layer)) return new Layer(board,peice,_x,_y,_w,_h, ofsx,ofsy);
+	if(!(this instanceof Layer)) return new Layer(board,peice,psv,_x,_y,_w,_h, ofsx,ofsy);
 	this.board = board;
 	this.peice = peice||null;
-	this.psvInstance = peice?peice.methods.Create( peice.psvCreate ):null;
+	this.psvInstance = peice?peice.methods.Create( psv, peice.psvCreate ):null;
 	//this.psvInstance = peice.methods.Create( peice.psvCreate );
-
-	function SetPeice( peice )
-		{
-			this.peice = peice;
-			if( peice )
-				this.psvInstance = peice.methods.Create( peice.psvCreate );
-			else
-				this.psvInstance = null;
-		}
 
 	this.iLayer; // during the process of saving, this is kept
 
@@ -141,17 +132,17 @@ export function Layer( board, peice,  _x,  _y, _w,  _h,  ofsx,  ofsy )
 
 
 	if( !this.flags.bRoute ) {
-	for( var x = 0; x < this.peice.size.cols; x++ )
-		for( var y = 0; y < this.peice.size.rows; y++ ) {
-			var newLayerPathNode = new layerPathNode()
-			newLayerPathNode.x = this.x + x - this.peice.hot.x;
-			newLayerPathNode.y = this.y + y - this.peice.hot.y;
-			newLayerPathNode.cellx = x;
-			newLayerPathNode.celly = y;
-			this.pds_path.push( newLayerPathNode );
-			//this.board.addLayerPathNode( newLayerPathNode );
+		for( var x = 0; x < this.peice.size.cols; x++ )
+			for( var y = 0; y < this.peice.size.rows; y++ ) {
+				var newLayerPathNode = new layerPathNode()
+				newLayerPathNode.x = this.x + x - this.peice.hot.x;
+				newLayerPathNode.y = this.y + y - this.peice.hot.y;
+				newLayerPathNode.cellx = x;
+				newLayerPathNode.celly = y;
+				this.pds_path.push( newLayerPathNode );
+				//this.board.addLayerPathNode( newLayerPathNode );
+			}
 		}
-	}
 }
 
 
@@ -626,14 +617,12 @@ function		NearDir(nNewDir, nDir) {return ( ( nNewDir == (nDir) ) ? 0 :
 		        
 			var layer0 = this.board.rootLayer;
 			if( this.next )
-			{
 				this.next.prior = this.prior;
-			}
-			else
+			else if( layer0.prior === this )
 				layer0.prior = this.prior;
 			if( this.prior )
 				this.prior.next = this.next;
-			else
+			else if( layer0.next === this )
 				layer0.next = this.next;
 		}
         

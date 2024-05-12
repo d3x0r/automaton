@@ -1,4 +1,5 @@
-
+import {popups} from "../../popups/popups.mjs";
+popups.utils.preAddPopupStyles( document.body, location.url )
 
 const	 NOWHERE = -1;
 const	 UP =0;
@@ -72,7 +73,9 @@ export function createPeice(  board,  name //= "A Peice"
 
 //--------------------------- Peice class -----------------------------------------------
 //class PEICE:public IPEICE, private PEICE_DATA
-export function Peice( board
+export class Peice{
+	
+	constructor( board
 	,  name
 	,  image //= null
 	,  rows// = 1
@@ -187,40 +190,43 @@ if( image )
 	  this.methods = new DefaultMethods(this);
   else 
 	  this.methods = methods;
-  this.methods.SetPeice( this );
+	if( "SetPeice" in this.methods )
+  	this.methods.SetPeice( this );
 
 }
 
-Peice.prototype.getimage = function(  )
+getimage (  )
 {
 	return this.image;
 }
 
-Peice.prototype.getcell = function( x, y )
+getcell ( x, y )
 {
 	this.lastCell.coords = this.grid[x%this.size.cols][y%this.size.rows];
 	return this.lastCell;
 }
 
-Peice.prototype.getCellSize = function(  )
+getCellSize (  )
 {
 	return this.cellSize;
 }
 
 
-Peice.prototype.getsize = function(  )
+getsize (  )
 {
 	return this.size;
 }
-Peice.prototype.gethotspot = function(  )
+gethotspot (  )
 {
 	return this.hot;
 }
 
+}
 
 //typedef class VIA *PVIA;
 //class VIA:public IVIA, public VIA_DATA
-export function Via(board
+export class Via extends Peice {
+	constructor(board
   , name
   , image //= null
   , imageNeg
@@ -228,15 +234,13 @@ export function Via(board
   , psv //= 0
 ) 
 {
-	Peice.call( this, board, name, {on:image,off:imageNeg}, 7, 7, 0, 0, false, true, methods, psv );
+	super( board, name, {on:image,off:imageNeg}, 7, 7, 0, 0, false, true, methods, psv );
 };
 
-Via.prototype = new Object( Peice.prototype );
-Via.prototype.constructor = Via;
 
 	//--------------------------------------------------------------
 
-Via.prototype. GetViaEnd=function( _direction, scale )
+ GetViaEnd( _direction, scale )
 {
 // to direction...
   switch( _direction )
@@ -265,7 +269,7 @@ Via.prototype. GetViaEnd=function( _direction, scale )
 
 //--------------------------------------------------------------
 
-Via.prototype.GetViaFill1=function( xofs, yofs, direction, scale )
+GetViaFill1( xofs, yofs, direction, scale )
 {
 	  var outofs = { x : 0, y : 0, cell:null };
   switch( direction )
@@ -299,7 +303,7 @@ Via.prototype.GetViaFill1=function( xofs, yofs, direction, scale )
 
 //--------------------------------------------------------------
 
-Via.prototype. GetViaFill2=function( xofs, yofs, direction, scale )
+ GetViaFill2( xofs, yofs, direction, scale )
 {
 	  var outofs = { x : 0, y : 0, cell:null };
   // via vills are done when placing a cell that exits in 'direction'
@@ -338,7 +342,7 @@ Via.prototype. GetViaFill2=function( xofs, yofs, direction, scale )
 
 //--------------------------------------------------------------
 
-Via.prototype. GetViaStart=function(  direction,  scale )
+ GetViaStart(  direction,  scale )
 {
 // from NOWHERE..
   switch( direction )
@@ -366,7 +370,7 @@ Via.prototype. GetViaStart=function(  direction,  scale )
 };
 //--------------------------------------------------------------
 
-Via.prototype. GetViaFromTo=function( from, to,  scale )
+ GetViaFromTo( from, to,  scale )
 {
   if( from == NOWHERE )
   {
@@ -421,78 +425,99 @@ return null;
 
 
 // plus additional private methods relating to vias....
-Via.prototype.Move=function(  ) { return 0; }
-Via.prototype.Stop=function(  ) { return 0; }
+Move(  ) { return 0; }
+Stop(  ) { return 0; }
 
-
+}
 
 
 //--------------------------- Default Methods ------------------------------------------
 
-export function DefaultMethods(peice) {
-	if( !(this instanceof DefaultMethods ) ) return new DefaultMethods();
-	this.master = peice;
-}
+export class DefaultMethods{ 
+	constructor(peice) {
+		this.master = peice;
+	}
 
-DefaultMethods.prototype.Move = function() {
+Move () {
 	return false;
 }
 
-DefaultMethods.prototype.Stop = function() {
+Stop () {
 	return false;
 }
 
 
-DefaultMethods.prototype.name  = function() { return "default methods"; }
-DefaultMethods.prototype.SetPeice = function(  peice )        { this.master = peice; }
-DefaultMethods.prototype.getimage = function()                { return this.master.getimage(); };
-DefaultMethods.prototype.getcell = function(  x,  y )         { return this.master.getcell(x,y); };
-DefaultMethods.prototype.getimage = function( scale)          { return this.master.getimage(scale); };
-DefaultMethods.prototype.getcell = function(  x,  y,  scale ) { return this.master.getcell(x,y,scale); };
-DefaultMethods.prototype.gethotspot = function(  )            { return this.master.gethotspot(); };
-DefaultMethods.prototype.getsize = function(  )               { return this.master.getsize(); };
+name  () { return "default methods"; }
+SetPeice (  peice )        { this.master = peice; }
+getimage ()                { return this.master.getimage(); };
+getcell (  x,  y )         { return this.master.getcell(x,y); };
+getimage ( scale)          { return this.master.getimage(scale); };
+getcell (  x,  y,  scale ) { return this.master.getcell(x,y,scale); };
+gethotspot (  )            { return this.master.gethotspot(); };
+getsize (  )               { return this.master.getsize(); };
 
 //class DEFAULT_METHODS:public PEICE_METHODS {
-DefaultMethods.prototype.Create = function( psvExtra )
+Create ( psvExtra )
 	{
 		return 0;
 	}
-DefaultMethods.prototype.Disconnect = function(  psv1 /*, PIPEICE peice, uintptr_t psv2*/ )
+Disconnect (  psv1 /*, PIPEICE peice, uintptr_t psv2*/ )
 	{
       return 0;
 	}
-DefaultMethods.prototype.Destroy = function( psv )
+Destroy ( psv )
 	{
 	}
 
-DefaultMethods.prototype.Update = function(  psv,  cycle )
+Update (  psv,  cycle )
 	{
 		return; // do nothing to update...
 		// consider on failure
 		// Destroy( psv );
 	}
-DefaultMethods.prototype.OnMove = function(  psv )
+OnMove (  psv )
 	{
 	}
-DefaultMethods.prototype.ConnectBegin  = function(  psv_to_instance,  x,  y
+ConnectBegin  (  psv_to_instance,  x,  y
 											  , peice_from,  psv_from_instance )
 	{
       return false;
 	}
-DefaultMethods.prototype.ConnectEnd  = function(  psv_to_instance,  x,  y
+ConnectEnd  (  psv_to_instance,  x,  y
 											  ,  peice_from,  psv_from_instance )
 	{
       return false;
 	}
-DefaultMethods.prototype.OnClick = function(  psv,  x,  y )
+OnClick (  psv,  x,  y )
+	{
+		if( x == 0 && y == 0 )
+		{
+			// this is implied to be the current peice that
+			// has been clicked on...
+			// will receive further OnMove events...
+			this.master.board.LockPeiceDrag();
+			return true;
+		}
+		else
+		{
+			if( !this.master.board.BeginPath( this.master.board.default_via
+						, this.master.board.mouse_current_layer.x + x
+						, this.master.board.mouse_current_layer.y + y, psv ) )
+			{
+				// attempt to grab existing path...
+				// current position, and current layer
+				// will already be known by the grab path method
+				//brainboard.board.GrabPath();
+			}
+		}
+		// so far there's nothing on this cell to do....
+		return false;
+	}
+OnRightClick (  psv,  x,  y )
 	{
 		return false;
 	}
-DefaultMethods.prototype.OnRightClick = function(  psv,  x,  y )
-	{
-		return false;
-	}
-DefaultMethods.prototype.OnDoubleClick = function(  psv,  x,  y )
+OnDoubleClick (  psv,  x,  y )
 	{
 		return false;
 	}
@@ -508,19 +533,19 @@ DefaultMethods.prototype.OnDoubleClick = function(  psv,  x,  y )
 					);
 	}
    */
-DefaultMethods.prototype.Draw = function(  peice, psvInstance,  surface,   x,  y )
+Draw (  peice, psvInstance,  surface,   x,  y )
 {
 	// first 0 is current scale.
 	//lprintf( WIDE("Drawing peice instance %p"), psvInstance );
 	//lprintf( WIDE("Drawing %d by %d"), rows, cols );
 
-   surface.drawImage( peice.image, x, y, this.master.size.cols * this.brainboard.board.cellSize.width, this.master.size.rows * this.brainboard.board.cellSize.height )
+   surface.drawImage( peice.image, x, y, this.master.size.cols * this.master.board.cellSize.width, this.master.size.rows * this.master.board.cellSize.height )
 //	BlotImageAlpha( surface
 					  //, peice
 					  //, x, y
 					  //, 1 );
 }
-DefaultMethods.prototype.DrawCell = function( peice, psvInstance,  surface,  from, x,  y )
+DrawCell ( peice, psvInstance,  surface,  from, x,  y )
 {
 	//surface.drawImage( this.master.image, 0, 0, 500, 500, 0, 0, 66, 66 )
 	//surface.drawImage( this.master.image, 0, 0, 500, 500, 0, 0, 66, 66 )
@@ -534,14 +559,14 @@ DefaultMethods.prototype.DrawCell = function( peice, psvInstance,  surface,  fro
 			, from.coords.x, from.coords.y
 			, from.size.width, from.size.height
 			, x, y
-			, this.brainboard.board.cellSize.width
-			, this.brainboard.board.cellSize.height  
+			, this.master.board.cellSize.width
+			, this.master.board.cellSize.height  
 		)
 	 else
 		surface.drawImage( this.master.image, from.coords.x, from.coords.y, from.size.width, from.size.height
 			, x, y
-			, this.brainboard.board.cellSize.width
-			, this.brainboard.board.cellSize.height  
+			, this.master.board.cellSize.width
+			, this.master.board.cellSize.height  
 		)
 //	BlotImageAlpha( surface
 					  //, peice
@@ -549,43 +574,109 @@ DefaultMethods.prototype.DrawCell = function( peice, psvInstance,  surface,  fro
 					  //, 1 );
 }
 
+}
+
 //-------------------- DEFAULT VIA METHODS (a few more than PEICE_METHODS ) ----------------------------
 
-export function DefaultViaMethods() {
-	if( !(this instanceof DefaultViaMethods ) ) return new DefaultViaMethods();
+export class DefaultViaMethods extends DefaultMethods { 
+	constructor() {
+		super();
+	}
+
+	Move ( )
+	{
+				return 0;
+	}
+	Stop ( )
+	{
+				return 0;
+	}
+
+	//-------------------- VIA METHODS ----------------------------------
+
+
+	OnClick (  psv,  x,  y )
+	{
+		console.log( "GENERATE DISCONNECT!" );
+		this.master.board.UnendPath( );
+		return 0;
+	}
+	Disconnect(  psv )
+	{
+		return true;
+	}
 	
+	OnRightClick (  psv,  x,  y )
+	{
+		return 0;
+	}
+	OnDoubleClick (  psv,  x,  y )
+	{
+		return 0;
+	}
+
+
 }
 
-DefaultViaMethods.prototype = new Object(  DefaultMethods.prototype );
-DefaultViaMethods.prototype.constructor = DefaultViaMethods();
+export class DefaultBackgroundMethods extends DefaultMethods {
+	component_menu = null;
+
+	constructor(  ) {
+		super();
+
+	}
 
 
-DefaultViaMethods.prototype.Move = function( )
-{
-      return 0;
+	Create() {
+				return true;
+			}
+	Destroy() {
+			
+		}
+
+	Connect  (  psvTo
+						, rowto,  colto
+						,  psvFrom
+						,  rowfrom,  colfrom )
+	{
+		return 0;
+	}
+
+	Update(  psv,  cycle )
+	{
+				console.log( ("Update background - nothing to do.") );
+		//parent.Update(psv,cycle);
+	}
+
+	OnClick(  psv,  x,  y )
+	{
+		this.master.board.LockDrag();
+		return true;
+	}
+
+	OnRightClick(  psv,  x,  y )
+	{
+		if( !this.component_menu )
+			this.component_menu = popups.createMenu( { suffix: "-model-component"} );
+		this.component_menu.reset();
+		this.master.board.peices.forEach( peice=>{
+			if( peice === this.master.board.default_peice ) 
+				return;
+			if( peice.isRoute ) return;
+			this.component_menu.addItem( peice.name, ()=>{
+				console.log( "This results here?", peice )
+				this.master.board.PutPeice( peice, x, y, {psv,x,y} );
+			});
+		})
+
+		this.component_menu.show( this.master.board.mousePos.x
+							, this.master.board.mousePos.y
+			)
+		return true;
+	}
+	DefaultOnDoubleClick(  psv,  x,  y )
+	{
+		result = TrackPopup( brainboard.hMenu, null );
+		return true;
+	}
 }
-DefaultViaMethods.prototype. Stop = function( )
-{
-      return 0;
-}
-
-//-------------------- VIA METHODS ----------------------------------
-
-
-DefaultViaMethods.prototype.OnClick = function(  psv,  x,  y )
-{
-	console.log( "GENERATE DISCONNECT!" );
-	this.master.board.UnendPath( );
-	return 0;
-}
-
-DefaultViaMethods.prototype.OnRightClick = function(  psv,  x,  y )
-{
-	return 0;
-}
-DefaultViaMethods.prototype.OnDoubleClick = function(  psv,  x,  y )
-{
-	return 0;
-}
-
-

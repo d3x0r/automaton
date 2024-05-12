@@ -135,6 +135,7 @@ export function Board( parent ) {
 		board.board_origin_y = 0;
 		board.scale = 0;
 		board.default_peice = null;
+		board.default_via = null;
 		board.mouse_current_layer = null;
 		board.route_current_layer = null;
 		board.move_current_layer = null;
@@ -173,7 +174,7 @@ Board.prototype.SetScale = function( _scale ) {
 	this.cellSize.height = this._cell_height >> _scale;
 	this.scale = _scale;
 }
-Board.prototype.SetCellSize = function( cx,  cy )
+Board.prototype.setCellSize = function( cx,  cy )
 {
 	this.cellSize.width = this._cell_width = cx;
 	this.cellSize.height = this._cell_height = cy;
@@ -208,7 +209,7 @@ Board.prototype.SetBackground = function( peice )
 {
 	this.default_peice = peice;
 	this.default_peice_instance = this.default_peice.methods.Create(peice.psvCreate);
-	this.rootLayer = new Layer( this, this.default_peice );
+	this.rootLayer = new Layer( this, this.default_peice, {} );
 	peice.image.addEventListener( "load", ()=>{
 		this.BoardRefresh();
 	});
@@ -218,26 +219,35 @@ Board.prototype.BeginPath = function( viaset, x, y, psv )
 {
 	if( this.mouse_current_layer )
 	{
-		var pl = new Layer( this, viaset );
+		viaset.psvCreate = psv; // kinda the wrong place for this but we abused this once upon a time.
+		const tmpx = this.wX;
+		const tmpy = this.wY;
+		this.wX = x;
+		this.wY = y;
+		var pl = new Layer( this, viaset, psv, x, y );
 		pl.flags.bRoute = true;
+		this.route_current_layer = pl;
 		var connect_okay = this.mouse_current_layer
 			.peice
 			.methods
 			.ConnectBegin( this.mouse_current_layer.psvInstance
-						, (this.wX - this.mouse_current_layer.x)
-						, (this.wY - this.mouse_current_layer.y)
+						, (x - this.mouse_current_layer.x)
+						, (y - this.mouse_current_layer.y)
 						, viaset
 						, pl.psvInstance );
+		this.wX = tmpx;
+		this.wY = tmpy;
 		if( !connect_okay )
 		{
+			this.route_current_layer = null;
 			return false;
 		}
 		this.mouse_current_layer.Link( pl, LINK_VIA_START
-										, (this.wX - this.mouse_current_layer.x)
-										, (this.wY - this.mouse_current_layer.y) );
+										, (x - this.mouse_current_layer.x)
+										, (y - this.mouse_current_layer.y) );
 		this.route_current_layer = pl;
 		// set the via layer type, and direction, and stuff..
-		pl.BeginPath( this.wX, this.wY );
+		pl.BeginPath( x, y );
 
 		pl.link_top(this.rootLayer);
 
@@ -290,9 +300,9 @@ Board.prototype.EndPath = function(  x,  y )
 		if( this.flags.bLeftChanged )
 		{
 			pld = layer;
-			var connect_okay = pld.layer.peice.methods.ConnectEnd( pld.layer.psvInstance
-																				, (this.wX - layer.layer.x)
-																				, (this.wY - layer.layer.y)
+			const connect_okay = pld.layer.peice.methods.ConnectEnd( pld.layer.psvInstance
+																				, (x - layer.layer.x)
+																				, (y - layer.layer.y)
 																				, this.route_current_layer.peice
 																				, this.route_current_layer.psvInstance );
 			if( connect_okay )
@@ -300,7 +310,7 @@ Board.prototype.EndPath = function(  x,  y )
 				//DebugBreak();
 				console.log( ("Heh guess we should do something when connect succeeds?") );
 				// keep route_current_layer;
-				layer.layer.Link( this.route_current_layer, LINK_VIA_END, (this.wX-layer.at.x), (this.wY-layer.at.y) );
+				layer.layer.Link( this.route_current_layer, LINK_VIA_END, (x-layer.at.x), (this.wY-layer.at.y) );
 				this.route_current_layer = null;
 				return true;
 			}
@@ -309,7 +319,7 @@ Board.prototype.EndPath = function(  x,  y )
 				this.route_current_layer.Unlink();
 				this.route_current_layer.isolate();
 
-				var disconnect_okay = this.route_current_layer
+				const disconnect_okay = this.route_current_layer
 						.peice
 						.methods
 						.Disconnect( this.route_current_layer.psvInstance );
@@ -335,7 +345,7 @@ Board.prototype.EndPath = function(  x,  y )
 				this.route_current_layer.Unlink();
 				this.route_current_layer.isolate();
 
-				var disconnect_okay = this.route_current_layer
+				const disconnect_okay = this.route_current_layer
 						.peice
 						.methods
 						.Disconnect( this.route_current_layer.psvInstance );
@@ -348,11 +358,12 @@ Board.prototype.EndPath = function(  x,  y )
 			return false;
 		}
 	}
-	return this.LayPathTo( this.wX, this.wY );
+	return this.LayPathTo( x, y );
 }
 
 Board.prototype.UnendPath = function( )
 {
+	if( !this.mouse_current_layer ) return;
 	var disconnect_okay = this.mouse_current_layer
 		.peice
 		.methods
@@ -385,12 +396,12 @@ Board.prototype.PutPeice = function(  peice, x, y, psv )
 				, x-hot.x+size.cols, y-hot.y+size.rows );
 	peice.psvCreate = psv; // kinda the wrong place for this but we abused this once upon a time.
 	
-	var pl = new Layer( this, peice, x, y, size.cols, size.rows, hot.x, hot.y );
+	var pl = new Layer( this, peice, psv, x, y, size.cols, size.rows, hot.x, hot.y );
 	// should be portioned...
 	pl.link_top(this.rootLayer);
 	
 	this.BoardRefresh();
-	return pl.psvInstance;
+	return pl;//pl.psvInstance;
 }
 
 
@@ -530,7 +541,7 @@ Board.prototype.DoMouse = function(  X,  Y,  b )
 				.peice
 				.methods
 				.OnMove( this.move_current_layer
-							.psvInstance
+							.psvInstance, this.wX, this.wY
 							);
 		}
 		else
@@ -665,7 +676,7 @@ Board.prototype.CreatePeice = function(  name //= ("A Peice")
 								,  psv
 								)
 {
-	var peice = peices.Peice( this, name, image, rows, cols, hotspot_x, hotspot_y, true, false, methods, psv );
+	var peice = new peices.Peice( this, name, image, rows, cols, hotspot_x, hotspot_y, true, false, methods, psv );
 	this.peices.push( peice );
 	return peice; // should be able to auto cast this...
 }
@@ -678,6 +689,8 @@ Board.prototype.CreateVia = function( name //= ("A Peice")
 											)
 {
 	var via = new peices.Via( this, name, image, imageNeg, methods, psv );
+	if( !this.default_via )
+		this.default_via = via;
 	this.peices.push( via );
 	return via;
 }
