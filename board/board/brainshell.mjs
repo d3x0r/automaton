@@ -1,5 +1,7 @@
 
+//--------------------------- Quick Popup Menu System ------------------------------
 
+import {createPopup} from "./menu.mjs"
 
 const  MNU_ADDCOMPONENT = 2048
 const  MNU_MAXCOMPONENT = MNU_ADDCOMPONENT + 256
@@ -1111,86 +1113,4 @@ TICK_OSCILLATOR_METHODS.prototype.Create = function(  psvExtra )
 }
 
 	
-
-//--------------------------- Quick Popup Menu System ------------------------------
-
-var mouseCatcher = document.getElementById( "mouseCatcher" );
-var topMenu;
-mouseCatcher.addEventListener( "click", (evt)=>{
-	mouseCatcher.style.visibility = "hidden";
-	if( topMenu )
-		topMenu.hide( true );
-} );
-	
-
-function createPopup() {
-	var menu = {
-		items: [],
-		parent : null,
-		container : document.createElement( "div" ),
-		board : null,
-		// hMenu, MF_STRING, MNU_ADDNEURON, ("Add &Neuron") );
-		appendItem( _flags, value, text ) {
-			if( _flags & MF_SEPARATOR) {
-				var newItem = document.createElement( "HR" );
-				this.container.appendChild( newItem );
-
-			}else {
-				var newItem = document.createElement( "A" );
-				var newItemBR = document.createElement( "BR" );
-				this.container.appendChild( newItem );
-				this.container.appendChild( newItemBR );
-				var flags = _flags;
-				newItem.value = value;
-				newItem.textContent = text;
-				newItem.className = "popup";
-				if( flags & MF_POPUP ) {
-					value.parent = this;
-					newItem.addEventListener( "mouseover", (evt)=>{
-						var r = newItem.getBoundingClientRect();
-						console.log( "Item is clicked show that.", evt.target.value, evt.clientX, evt.clientY );
-
-						newItem.value.show( this.board, evt.clientX, r.top - 10, this.cb );
-					} );
-					newItem.addEventListener( "mouseout", (evt)=>{
-						var r = newItem.getBoundingClientRect();
-						console.log( "Item is clicked show that.", evt.target.value, evt.clientX, r.top );
-						if( evt.toElement !== newItem.value.container )		
-							newItem.value.hide();
-					} );
-				} else
-					newItem.addEventListener( "click", (evt)=>{
-						this.cb( evt.target.value );
-						console.log( "Item is clicked.", evt.target.value );
-						this.hide( true );
-					} );
-			}
-		},
-		hide( all ) {
-			this.container.style.visibility = "hidden";
-			if( this.parent ) {
-				if( all )
-					this.parent.hide( all );
-			} else {
-				mouseCatcher.style.visibility = "hide"
-			}
-		},
-		show( board, x, y, cb ) {
-			this.board = board;
-			this.cb = cb;
-			mouseCatcher.style.visibility = "visible"
-			this.container.style.visibility = "inherit";
-			this.container.style.left = x;
-			this.container.style.top = y;
-		},
-		reset() {
-			console.log( "hide everything?" );	
-		}
-	};
-	mouseCatcher.appendChild( menu.container );
-	menu.container.className = "popup";
-	menu.container.style.zIndex = 50;
-
-	return menu;
-}
 

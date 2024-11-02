@@ -26,28 +26,28 @@ export function Board( parent ) {
 	var _buttons = 0;
 	function mouseMove( evt ) {
 		evt.preventDefault();
-		board.mousePos.x = evt.clientX;
-		board.mousePos.y = evt.clientY;
-		var pRect = parent.getBoundingClientRect();
+		var pRect = canvas.getBoundingClientRect();
+		board.mousePos.x = evt.clientX-pRect.top;
+		board.mousePos.y = evt.clientY-pRect.left;
 		
 		board.DoMouse( evt.offsetX * canvas.width/pRect.width, evt.offsetY* canvas.height/pRect.height, _buttons );
 	}
 	function mouseUp( evt ) {
 		evt.preventDefault();
 		_buttons = evt.buttons;
-		board.mousePos.x = evt.clientX;
-		board.mousePos.y = evt.clientY;
-		var pRect = parent.getBoundingClientRect();
+		var pRect = canvas.getBoundingClientRect();
+		board.mousePos.x = evt.clientX-pRect.top;
+		board.mousePos.y = evt.clientY-pRect.left;
 		
 		board.DoMouse( evt.offsetX * canvas.width/pRect.width, evt.offsetY* canvas.height/pRect.height, _buttons );
 	}
 	function mouseDown( evt ) {
 		evt.preventDefault();
 		_buttons = evt.buttons;
-		board.mousePos.x = evt.clientX;
-		board.mousePos.y = evt.clientY;
-		var pRect = parent.getBoundingClientRect();
-		
+		var pRect = canvas.getBoundingClientRect();
+		board.mousePos.x = evt.clientX-pRect.top;
+		board.mousePos.y = evt.clientY-pRect.left;
+				
 		board.DoMouse( evt.offsetX * canvas.width/pRect.width, evt.offsetY* canvas.height/pRect.height, _buttons );
 	}
 
@@ -173,6 +173,7 @@ Board.prototype.SetScale = function( _scale ) {
 	this.cellSize.width = this._cell_width >> _scale;
 	this.cellSize.height = this._cell_height >> _scale;
 	this.scale = _scale;
+	this.BoardRefresh();
 }
 Board.prototype.setCellSize = function( cx,  cy )
 {
@@ -195,8 +196,8 @@ Board.prototype.reset = function( )
 	this.board_origin_x = 0;
 	this.board_origin_y = 0;
 	
-
 	this.layerPool = LayerPool();
+	this.rootLayer = new Layer( this, this.default_peice, {} );
 }
 
 
@@ -460,6 +461,9 @@ Board.prototype.BoardRefresh = function(  )  // put current board on screen.
 				this.DrawLayer( layer );
 			}
 		}
+		for( let p of this.peices ) {
+			p.methods.FinalDraw( p, ctx );
+		}
 	}catch(err) {
 		if( errCount++ < 10 )
 		console.log( "(try again later) FAILED:", err ); 
@@ -578,7 +582,7 @@ Board.prototype.DoMouse = function(  X,  Y,  b )
 			{
 				var pld = layer;
 				this.mouse_current_layer = layer.layer;
-				//console.log( ("Generate onclick method to peice.") );
+				//console.log( ("Generate onclick method to peice."), layer.at.x, layer.at.y );
 				pld.layer.peice.methods.OnClick( pld.layer.psvInstance, layer.at.x, layer.at.y );
 				this.mouse_current_layer = null;
 			}
