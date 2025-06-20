@@ -79,123 +79,127 @@ export class Peice{
 
 
 	constructor( board
-	,  name
-	,  image //= null
-	,  rows// = 1
-	,  cols// = 1
-	,  hotx //= 0//(cols-1)/2
-	,  hoty //= 0//(rows-1)/2
-	,  bBlock// = 0
-	,  bVia //= 0
-	,  methods //= null
-	,  psv //= 0
-  )
-{
-
-
-	if( !(this instanceof Peice ) ) return new Peice( board,name,image,rows,cols,hotx,hoty,bBlock,bVia, methods,psv)
-	//console.trace( image );
-	this.flags =  {
-		block:0,
-		viaset:0,
-	};
-	this.scaled= [];// x1, x2, x4 // [3] ( [rows][cols] ) + 1
-	this.current_scale; // set by setting scale...
-	this.isBlock = bBlock;
-	this.isRoute = bVia;
-
-	this.cellSize = board.GetCellSize( );
-	this.size = { rows:rows, cols:cols };
-	this.cellSize = { width:0, height:0 };
-	this.hot = { x:hotx, y:hoty };
-	this.board = board;
-	//PEICE_DATA::image = image;
-	this.name = name;
-	this.original = image;
-	this.image = image;
-	// this should be moved out to a thing which is
-	// like re-mip-map :)
-	// or recompute based on a new cell size of the main board...
-
-	if( "on" in image )
-		image = image.on; // just need one of these for now... 
-	else
-		this.image = image;
-	if( image )
+	           ,  name
+	           ,  image //= null
+	           ,  rows// = 1
+	           ,  cols// = 1
+	           ,  hotx //= 0//(cols-1)/2
+	           ,  hoty //= 0//(rows-1)/2
+	           ,  bBlock// = 0
+	           ,  bVia //= 0
+	           ,  methods //= null
+	           ,  psv //= 0
+	)
 	{
-		var scale = 0, x, y;
-		this.grid = null;
-		this.lastCell = { coords:null, size:this.cellSize };
-		//this.image = image;
-		//this.image.src = image;
-		if( image.nodeName === "IMG" ) {
-			image.addEventListener( "load", initGrid.bind(this) );
-			if( image.width )
-				initGrid.call(this);
-		} else if( image.nodeName === "svg" ) {
-			var wrapper;// = document.createElement( "div" );
-			//wrapper.appendChild( image );
-			function convert(image) {
-				var svghtml = new XMLSerializer().serializeToString(image);//image.outerHTML;
-				//svghtml =[ svghtml.slice( 0, 5 ), "xmlns='http://www.w3.org/2000/svg' ", svghtml.slice( 5 ) ].join("");
-				var svg = "data:image/svg+xml" /*+ ";base64"*/ + "," + encodeURI( svghtml ).replace( /\#/g, "%23" );
-				wrapper = document.createElement( "img" );
-				wrapper.width = image.getAttribute( "width");
-				wrapper.height = image.getAttribute( "height");
-				//console.log( "choppinw with:", wrapper.width, wrapper.height )
-				wrapper.src = svg;
-				return wrapper;
-			}
-			this.original.on = convert( this.original.on );
-			this.original.off = convert( this.original.off );
-			if( "range" in this.original ) {
-				this.original.range = this.original.range.map( convert );
-			}
-			this.image = this.original;
+		//console.trace( image );
+		this.flags =  {
+			block:0,
+			viaset:0,
+		};
+		this.scaled= [];// x1, x2, x4 // [3] ( [rows][cols] ) + 1
+		this.current_scale; // set by setting scale...
+		this.isBlock = bBlock;
+		this.isRoute = bVia;
 
+		this.cellSize = board.GetCellSize( );
+		this.size = { rows:rows, cols:cols };
+		this.cellSize = { width:0, height:0 };
+		this.hot = { x:hotx, y:hoty };
+		this.board = board;
+		//PEICE_DATA::image = image;
+		this.name = name;
+		this.original = image;
+		this.image = image;
+		// this should be moved out to a thing which is
+		// like re-mip-map :)
+		// or recompute based on a new cell size of the main board...
 
-			//wrapper.addEventListener( "load", initGrid.bind(this) );
-			initGrid.call(this);
-		}
-		function initGrid(){
-			var width ;
-			var height;
-			var img = this.image;
-			if( "on" in img )
-				img = img.on;
-
-			if( typeof img.width === "number" ) {
-				width = (img.width / this.size.cols);
-				height = (img.height / this.size.rows);
-			} else {
-				width = ( 66 / this.size.cols);
-				height = (66 / this.size.rows);
-			}
-			var coords = [];
-			this.cellSize.width = width;
-			this.cellSize.height = height;
-			for( var c = 0; c < this.size.cols; c++ )  {
-				coords[c] = [];
-				for( var r = 0; r < this.size.rows; r++ )
-				{
-					coords[c].push( { x : c * width, y:r*height, r:r-this.hot.y, c:c-this.hot.x } );
+		if( "on" in image )
+			image = image.on; // just need one of these for now... 
+		else
+			this.image = image;
+		if( image )
+		{
+			var scale = 0, x, y;
+			this.grid = null;
+			this.lastCell = { coords:null, size:this.cellSize };
+			//this.image = image;
+			//this.image.src = image;
+			if( image.nodeName === "IMG" ) {
+				image.addEventListener( "error", (err)=>{
+					console.log( "image failed to load?");
+					const index = this.board.peices.indexOf( this );
+					if( index >= 0 )
+						this.board.peices.splice( index, 1 );
+				})
+				image.addEventListener( "load", initGrid.bind(this) );
+				if( image.width )
+					initGrid.call(this);
+			} else if( image.nodeName === "svg" ) {
+				var wrapper;// = document.createElement( "div" );
+				//wrapper.appendChild( image );
+				function convert(image) {
+					var svghtml = new XMLSerializer().serializeToString(image);//image.outerHTML;
+					//svghtml =[ svghtml.slice( 0, 5 ), "xmlns='http://www.w3.org/2000/svg' ", svghtml.slice( 5 ) ].join("");
+					var svg = "data:image/svg+xml" /*+ ";base64"*/ + "," + encodeURI( svghtml ).replace( /\#/g, "%23" );
+					wrapper = document.createElement( "img" );
+					wrapper.width = image.getAttribute( "width");
+					wrapper.height = image.getAttribute( "height");
+					//console.log( "choppinw with:", wrapper.width, wrapper.height )
+					wrapper.src = svg;
+					return wrapper;
 				}
+				this.original.on = convert( this.original.on );
+				this.original.off = convert( this.original.off );
+				if( "range" in this.original ) {
+					this.original.range = this.original.range.map( convert );
+				}
+				this.image = this.original;
+
+
+				//wrapper.addEventListener( "load", initGrid.bind(this) );
+				initGrid.call(this);
 			}
-			this.grid = coords;
+			function initGrid(){
+				var width ;
+				var height;
+				var img = this.image;
+				if( "on" in img )
+					img = img.on;
+
+				if( typeof img.width === "number" ) {
+					width = (img.width / this.size.cols);
+					height = (img.height / this.size.rows);
+				} else {
+					width = ( 66 / this.size.cols);
+					height = (66 / this.size.rows);
+				}
+				var coords = [];
+				this.cellSize.width = width;
+				this.cellSize.height = height;
+				for( var c = 0; c < this.size.cols; c++ )  {
+					coords[c] = [];
+					for( var r = 0; r < this.size.rows; r++ )
+					{
+						coords[c].push( { x : c * width, y:r*height, r:r-this.hot.y, c:c-this.hot.x } );
+					}
+				}
+				this.grid = coords;
+			}
+			// level 0 scaled
+			this.current_scale = 0;
+		} else {
+			throw new Error( "Peice is not initialized with an image; peice size could not be calculated:" + name);
 		}
-	// level 0 scaled
-	this.current_scale = 0;
-	}
 
-	// from the original file deifnitino psv here is totally bogus.
-	this.psvCreate = psv; /* brainboard for now?*/
-	if( !methods )
-		this.methods = new DefaultMethods(this);
-	else 
-		this.methods = methods;
+		// from the original file deifnitino psv here is totally bogus.
+		this.psvCreate = psv; /* brainboard for now?*/
+		if( !methods )
+			this.methods = new DefaultMethods(this);
+		else 
+			this.methods = methods;
 		if( "SetPeice" in this.methods )
-		this.methods.SetPeice( this );
-
+			this.methods.SetPeice( this );
 	}
 
 	getimage (  )

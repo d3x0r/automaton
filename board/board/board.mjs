@@ -680,7 +680,7 @@ Board.prototype.CreatePeice = function(  name //= ("A Peice")
 								,  psv
 								)
 {
-	var peice = new peices.Peice( this, name, image, rows, cols, hotspot_x, hotspot_y, true, false, methods, psv );
+	var peice = new peices.Peice( this, name, image, rows, cols, hotspot_x, hotspot_y, true, false, methods, psv, this.peices.length );
 	this.peices.push( peice );
 	return peice; // should be able to auto cast this...
 }
